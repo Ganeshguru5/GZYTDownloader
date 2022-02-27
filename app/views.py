@@ -30,7 +30,7 @@ def download(request):
 def downloaddone(request,resolution):
     global url
     homedir=os.path.expanduser('~')
-    dirs=homedir+'/Download'
+    dirs=homedir+'/Downloads'
     if request.method == 'POST':
         if (resolution=='144p' and YouTube(url).streams.get_by_resolution(resolution) == None):
             YouTube(url).streams.get_by_itag(17).download(dirs)
