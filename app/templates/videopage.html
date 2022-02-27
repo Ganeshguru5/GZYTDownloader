@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GZYTDownloader</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,600&family=Varela+Round&display=swap" rel="stylesheet">
+
+    <style>
+.table{
+    width: 600px;
+}
+
+@media only screen and (max-width: 600px) {
+     iframe{
+         width: 300px;
+         height: 200px;
+     }
+     .table{
+         width: 300px;
+         margin: auto;
+         text-align: center;
+     }
+    }
+</style>
+<script>
+let size=document.getElementById('size')
+console.log(size)
+</script>
+</head>
+<body style="font-family:Montserrat;">
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+        <!-- <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top"> -->
+        <span id="logo">&#8734;</span> 
+            GZ-YouTube Downloader
+        </a>
+    </div>
+      
+</nav>
+<div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
+  </div>
+  <div class="embed-responsive embed-responsive-21by9">
+    <center>
+    <p> some video preview are not available due to YouTube's embed policy</p>
+    <p>But you can download it .....</p>
+    <iframe width="560"  height="315" class="embed-responsive-item m-3" src="{{embed}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </center>
+</div>
+<center>
+<table class="table">
+<thead>
+    <th>Quality</th>
+    <th>Size</th>
+    <th>Download</th>
+</thead>
+{% for i in video%}
+<tbody>
+    <tr>
+        <th>{{i.resolution}}</th>
+        <th id="size">{{i.filesize}}</th>
+        <th>
+            <form action="{% url 'gz:donedownload' i.resolution %}" method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-success" value="Download">
+            </form>
+            <!-- <button type="submit" class="btn btn-primary"><i class="fas fa-download"></i>Download</button> -->
+        </th>
+    </tr>
+</tbody>
+{% endfor %}
+</table>
+</center>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+</body>
+</html>
